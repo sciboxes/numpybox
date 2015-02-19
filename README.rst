@@ -3,8 +3,8 @@ numpybox
 ********
 
 This repository provides the necessary files to provision a virtual machine
-with a python virtual environment with numpy, ipython and the required packages
-(jinja2, pyzmq, tornado) to run the ipython notebook.
+with a python virtual environment with numpy, ipython, matplotlib, and the
+required packages (jinja2, pyzmq, tornado) to run the ipython notebook.
 
 At the time of this writing the box used is the official **Ubuntu Server 14.04
 LTS (Trusty Tahr)** build as found at Vagrant Cloud at
@@ -67,14 +67,15 @@ Active it
 
 .. code-block:: bash
 
-   vagrant@(...)~$ source env/bin/activate
+   vagrant@(...)~$ source ~/env/bin/activate
 
 The provisioning phase should also install the python packages listed under
-``src/requirements.txt``. Consequently, if you run ``pip freeze`` you should
+``requirements.txt``. Consequently, if you run ``pip freeze`` you should
 see the following packages:
 
 * jinja2
 * ipython
+* matplotlib
 * numpy
 * pyzmq
 * tornado
