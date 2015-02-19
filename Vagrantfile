@@ -1,20 +1,22 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
+
+BOX_NAME = ENV["NUMPYBOX_NAME"] || "numpybox"
+LAB_DIR = ENV["LAB_DIR"] || "lab/"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "numpybox"
+    vb.name = BOX_NAME
     vb.customize ["modifyvm", :id, "--memory", 2048]
   end
 
   config.vm.network "private_network", type: "dhcp"
   config.ssh.forward_agent = true
-  config.vm.synced_folder "src/", "/home/vagrant/src/"
+  config.vm.synced_folder LAB_DIR, "/home/vagrant/lab/"
 
   # speed up provisioning by enabling caching
   if Vagrant.has_plugin?("vagrant-cachier")

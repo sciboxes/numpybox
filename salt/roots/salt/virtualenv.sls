@@ -1,3 +1,13 @@
+# for matplotlib
+libfreetype6-dev:
+  pkg:
+    - installed
+
+pkg-config:
+  pkg:
+    - installed
+
+
 virtualenv:
   pip.installed:
     - require:
@@ -8,10 +18,9 @@ numpy_virtualenv:
     - name: /home/vagrant/env/
     - user: vagrant
     - no_chown: True
-    - cwd: /home/vagrant/src
+    - cwd: /home/vagrant/lab/
     - system_site_packages: False
-    - requirements: /home/vagrant/src/requirements.txt
+    - requirements: /vagrant/requirements.txt
     - verbose: True
     - require:
       - pip: virtualenv
-
