@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 BOX_NAME = ENV["NUMPYBOX_NAME"] || "numpybox"
-LAB_DIR = ENV["LAB_DIR"] || "lab/"
+LABDIR = ENV["LABDIR"] || "lab/"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "private_network", type: "dhcp"
   config.ssh.forward_agent = true
-  config.vm.synced_folder LAB_DIR, "/home/vagrant/lab/"
+  config.vm.synced_folder LABDIR, "/home/vagrant/lab/"
 
   # speed up provisioning by enabling caching
   if Vagrant.has_plugin?("vagrant-cachier")
@@ -25,6 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "salt/roots/", "/srv/"
   config.vm.provision :salt do |salt|
+    salt.install_type = "git"
+    salt.install_args = "v2015.2.0rc1"
     salt.minion_config = "salt/minion"
     salt.run_highstate = true
     salt.verbose = true
