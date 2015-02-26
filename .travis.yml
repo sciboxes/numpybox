@@ -4,7 +4,7 @@ python:
 
 before_install:
   - sudo apt-get update
-  - curl -L http://bootstrap.saltstack.org | sudo sh -s -- git 2015.2.0rc1
+  - curl -L http://bootstrap.saltstack.org | sudo sh
   - sudo cp .salt/minion /etc/salt/minion
 
 install:
