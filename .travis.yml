@@ -1,17 +1,24 @@
+# based on
+# https://github.com/ipython/salt-states-nbviewer/blob/master/.travis.yml
+
 language: python
 python:
   - '2.7'
 
 before_install:
   - sudo apt-get update
-  - curl -L http://bootstrap.saltstack.org | sudo sh
-  - sudo cp .salt/minion /etc/salt/minion
+  - curl -o install_salt.sh -L http://bootstrap.saltstack.com
+  - sudo sh install_salt.sh git develop
+  - sudo cp .travis/minion /etc/salt/minion
+  - sudo cp requirements.txt /home/travis/
 
 install:
-  - sudo cp -r .salt/roots/salt/ /srv/salt/
-  - sudo service salt-minion restart
+  - sudo cp -r salt/roots/salt/ /srv/salt/
+  - sudo cp -r salt/roots/pillar/ /srv/pillar/
   - sudo salt-call --local grains.items
+  - sudo pip install pytest
 
 script:
   - sudo salt-call state.show_highstate --local --retcode-passthrough
-  - sudo salt-call --local state.highstate -l debug
+  - sudo salt-call state.highstate --hard-crash --local -l debug
+  - sudo py.test -v tests.py
