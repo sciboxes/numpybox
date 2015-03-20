@@ -1,3 +1,7 @@
+.. image:: https://travis-ci.org/sciboxes/numpybox.svg?branch=master
+   :target: https://travis-ci.org/sciboxes/numpybox
+
+
 ********
 numpybox
 ********
