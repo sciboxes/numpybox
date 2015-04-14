@@ -1,0 +1,4 @@
+-r base.txt
+
+matplotlib==1.4.3
+numpy==1.9.2
