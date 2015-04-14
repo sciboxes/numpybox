@@ -8,7 +8,7 @@ python:
 before_install:
   - sudo apt-get update
   - curl -o install_salt.sh -L http://bootstrap.saltstack.com
-  - sudo sh install_salt.sh git develop
+  - sudo sh install_salt.sh git v2015.2.0rc2
   - sudo cp .travis/minion /etc/salt/minion
   - sudo cp requirements.txt /home/travis/
 
