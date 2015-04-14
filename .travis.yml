@@ -20,5 +20,7 @@ install:
 
 script:
   - sudo salt-call state.show_highstate --local --retcode-passthrough
-  - sudo salt-call state.highstate --hard-crash --local -l debug
+  - sudo salt-call state.sls locale --hard-crash --local -l debug
+  - sudo salt-call state.sls python --hard-crash --local -l debug
+  - sudo salt-call state.sls virtualenv --hard-crash --local -l debug
   - sudo py.test -v tests.py
